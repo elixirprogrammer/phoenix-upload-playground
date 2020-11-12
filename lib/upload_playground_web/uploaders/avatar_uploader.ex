@@ -30,8 +30,8 @@ defmodule UploadPlayground.AvatarUploader do
   # end
 
   # Override the storage directory:
-  def storage_dir(_version, {_file, _scope}) do
-    "uploads/"
+  def storage_dir(_version, {_file, _avatar}) do
+    "upload/"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

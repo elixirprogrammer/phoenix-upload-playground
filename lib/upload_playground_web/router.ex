@@ -17,7 +17,9 @@ defmodule UploadPlaygroundWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/avatars", AvatarController
+    resources "/avatars", AvatarController do
+      get "/upload", AvatarController, :upload, as: "upload"
+    end
     post "/avatar", AvatarController, :create_avatar
   end
 

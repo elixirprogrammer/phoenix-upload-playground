@@ -16,6 +16,18 @@ config :upload_playground, UploadPlaygroundWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+
+config :waffle,
+  storage: Waffle.Storage.S3, # or Waffle.Storage.Local
+  bucket: System.get_env("AWS_BUCKET_NAME") # if using S3
+
+# If using S3:
+config :ex_aws,
+  json_codec: Jason,
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
+  region: System.get_env("AWS_REGION")
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

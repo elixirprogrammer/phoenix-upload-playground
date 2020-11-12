@@ -12,8 +12,8 @@
   <tbody>
 <%= for avatar <- @avatars do %>
     <tr>
-      <td><%= avatar.avatar %></td>
-      <td><%= avatar.image %></td>
+      <td><%= img_tag(Routes.avatar_upload_path(@conn, :upload, avatar.id), height: 100) %></td>
+      <td><%= link avatar.avatar.file_name, to: Routes.avatar_upload_path(@conn, :upload, avatar.id) %></td>
 
       <td>
         <span><%= link "Show", to: Routes.avatar_path(@conn, :show, avatar) %></span>

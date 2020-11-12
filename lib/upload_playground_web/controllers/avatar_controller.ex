@@ -72,4 +72,11 @@ defmodule UploadPlaygroundWeb.AvatarController do
         render(conn, "new.html", avatar_changeset: changeset)
     end
   end
+
+  def upload(conn, %{"avatar_id" => id}) do
+    avatar = Users.get_avatar!(id)
+    conn
+    |> put_resp_content_type("image/jpeg")
+    |> send_file(200, "uploads/#{avatar.avatar.file_name}")
+  end
 end

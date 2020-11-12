@@ -77,6 +77,6 @@ defmodule UploadPlaygroundWeb.AvatarController do
   def upload(conn, %{"name" => avatar_name}) do
     conn
     |> put_resp_content_type("image/jpeg")
-    |> send_file(200, "uploads/#{avatar_name}")
+    |> send_file(200, "upload/#{avatar_name}")
   end
 end

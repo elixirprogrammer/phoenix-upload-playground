@@ -5,6 +5,7 @@ defmodule UploadPlayground.AvatarUploader do
   use Waffle.Ecto.Definition
 
   @versions [:original]
+  @extension_whitelist ~w(.jpg .jpeg .gif .png .pdf)
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]
@@ -16,12 +17,19 @@ defmodule UploadPlayground.AvatarUploader do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    file_extension = file.file_name |> Path.extname |> String.downcase
+    Enum.member?(@extension_whitelist, file_extension)
   end
 
   # Define a thumbnail transformation:
   # def transform(:thumb, _) do
-  #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
+  #   # {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
+  #   # case :os.type do
+  #   # {:win32, :nt} ->
+  #   #   {:magick, fn(input, _output) -> "convert #{input} -thumbnail 250x250^ -gravity center -extent 250x250 -format png" end}
+  #   # _ ->
+  #   #   {:convert, "-thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
+  #   # end
   # end
 
   # Override the persisted filenames:

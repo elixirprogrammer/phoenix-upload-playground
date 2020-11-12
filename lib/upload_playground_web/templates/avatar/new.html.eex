@@ -1,0 +1,21 @@
+<h1>New Avatar</h1>
+
+<%= form_for @changeset, Routes.avatar_path(@conn, :create_avatar), [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :avatar %>
+    <%= file_input f, :avatar %>
+    <%= error_tag f, :avatar %>
+  </div>
+
+  <div>
+    <%= submit "Upload avatar", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<span><%= link "Back", to: Routes.avatar_path(@conn, :index) %></span>

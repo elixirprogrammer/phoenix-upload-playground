@@ -17,6 +17,8 @@ defmodule UploadPlaygroundWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/avatars", AvatarController
+    post "/avatar", AvatarController, :create_avatar
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,18 @@
+<h1>Show Avatar</h1>
+
+<ul>
+
+  <li>
+    <strong>Avatar:</strong>
+    <%= @avatar.avatar %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @avatar.image %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.avatar_path(@conn, :edit, @avatar) %></span>
+<span><%= link "Back", to: Routes.avatar_path(@conn, :index) %></span>

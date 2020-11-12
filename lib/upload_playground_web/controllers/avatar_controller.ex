@@ -53,6 +53,7 @@ defmodule UploadPlaygroundWeb.AvatarController do
 
   def delete(conn, %{"id" => id}) do
     avatar = Users.get_avatar!(id)
+    :ok = UploadPlayground.AvatarUploader.delete(avatar.avatar.file_name)
     {:ok, _avatar} = Users.delete_avatar(avatar)
 
     conn
@@ -69,7 +70,7 @@ defmodule UploadPlaygroundWeb.AvatarController do
         |> redirect(to: Routes.avatar_path(conn, :index))
 
       {:error, changeset} ->
-        render(conn, "new.html", avatar_changeset: changeset)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
